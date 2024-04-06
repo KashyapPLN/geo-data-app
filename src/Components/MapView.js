@@ -1,17 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css'; // Import Leaflet.draw CSS
 import 'leaflet-draw'; // Import Leaflet.draw
 
-const MapView = ({ geoJSONData }) => {
+const MapView = ({ geoJSONData,setGeoJSONData }) => {
   const mapRef = useRef(null);
   const mapInstance = useRef(null);
   const geoJSONLayerRef = useRef(null);
   const drawControlRef = useRef(null);
   const editControlRef = useRef(null);
-  const user = JSON.parse(localStorage.getItem('user'));
-  
+   const userId = JSON.parse(localStorage.getItem('user')).id;
+
   useEffect(() => {
     if (mapRef.current && !mapInstance.current) {
       mapInstance.current = L.map(mapRef.current).setView([0, 0], 2);
@@ -34,6 +34,7 @@ const MapView = ({ geoJSONData }) => {
       mapInstance.current.on(L.Draw.Event.CREATED, (event) => {
         const layer = event.layer;
         geoJSONLayerRef.current.addLayer(layer);
+        setGeoJSONData(geoJSONLayerRef.current.toGeoJSON());
       });
     }
 
@@ -66,12 +67,38 @@ const MapView = ({ geoJSONData }) => {
           const editedShape = layer.toGeoJSON();
           // Update the shape's geometry and attributes in your data model or perform other actions
           console.log('Edited shape:', editedShape);
+          setGeoJSONData(geoJSONLayerRef.current.toGeoJSON());
         });
       });
     }
   }, [geoJSONData]);
 
-  return <div ref={mapRef} style={{ height: '400px', width: '100%' }} />;
+  const handleUpdate = async () => {
+    try {
+        const response = await fetch('http://localhost:5000/geospatial/update-geojson', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId, updatedData: geoJSONData })
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update GeoJSON data');
+        }
+        // Handle success, e.g., show success message
+    } catch (error) {
+        console.error('Error updating GeoJSON data:', error);
+        // Handle error
+    }
+};
+
+
+  return (
+    <div>
+      <div ref={mapRef} style={{ height: '400px', width: '100%' }} />
+      <button onClick={handleUpdate}>Update GeoJSON Data</button>
+    </div>
+  );
 };
 
 export default MapView;

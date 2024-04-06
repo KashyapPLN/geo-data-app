@@ -59,7 +59,7 @@ function logout(){
       <Routes>
         <Route
           path="/"
-          element={<Home onFileUpload={handleFileUpload} geoJSONData={geoJSONData} logout={logout}/>}
+          element={<Home onFileUpload={handleFileUpload} geoJSONData={geoJSONData} setGeoJSONData={setGeoJSONData} logout={logout}/>}
         />
         <Route path="/login" element={<Login />}/>
         <Route path="/signup" element={<Signup />} />
