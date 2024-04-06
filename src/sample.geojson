@@ -1,0 +1,20 @@
+{
+    "type": "Feature",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [-77.036, 38.897],
+          [-77.036, 38.902],
+          [-77.029, 38.902],
+          [-77.029, 38.897],
+          [-77.036, 38.897]
+        ]
+      ]
+    },
+    "properties": {
+      "name": "Sample Polygon",
+      "description": "This is a sample polygon."
+    }
+  }
+  

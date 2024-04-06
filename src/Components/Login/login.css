@@ -1,0 +1,21 @@
+.login-page{
+    height:40%;
+    width:33%;
+    margin-left: 33%;
+    margin-right: 33%;
+    display:flex;
+    justify-content: center;
+    margin-top: 5%;
+    align-items: center;
+  }
+
+  .signup-page{
+    height:40%;
+    width:33%;
+    margin-left: 33%;
+    margin-right: 33%;
+    display:flex;
+    justify-content: center;
+    margin-top: 5%;
+    align-items: center;
+  }
