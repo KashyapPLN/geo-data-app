@@ -16,7 +16,7 @@ const App = () => {
     if(JSON.parse(localStorage.getItem('user'))){
 setUser(JSON.parse(localStorage.getItem('user')))
     }
-     if (user && user._id) {
+     if (JSON.parse(localStorage.getItem('user'))&& JSON.parse(localStorage.getItem('user'))._id) {
      navigate('/');
     } else {
     navigate('/login');
