@@ -3,8 +3,8 @@ import FileUploadForm from './FileUploadForm';
 import MapView from './MapView';
 import { Button } from 'react-bootstrap';
 
-export default function Home({onFileUpload,geoJSONData,logout,setGeoJSONData}) {
-  const user = JSON.parse(localStorage.getItem('user'));
+export default function Home({onFileUpload,geoJSONData,logout,setGeoJSONData,user,setUser}) {
+  // const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div>
       {user && (
@@ -14,7 +14,7 @@ export default function Home({onFileUpload,geoJSONData,logout,setGeoJSONData}) {
         </div>
       )}
          <FileUploadForm onFileUpload={onFileUpload} />
-      <MapView geoJSONData={geoJSONData} setGeoJSONData={setGeoJSONData} />
+      {user && <MapView geoJSONData={geoJSONData} setGeoJSONData={setGeoJSONData} />}
 
       
     </div>

@@ -24,7 +24,7 @@ const Login = () => {
         const response = await axios.post('http://localhost:5000/auth/login', { email, password });
   
         // Handle success
-        console.log('Login successful:', JSON.stringify(response.data.user));
+        console.log('Login successful:', JSON.stringify(response.data.user._id));
         // Redirect to dashboard or any other page after successful login
         localStorage.setItem('user',JSON.stringify(response.data.user));
       navigate('/');

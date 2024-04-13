@@ -10,7 +10,7 @@ const MapView = ({ geoJSONData,setGeoJSONData }) => {
   const geoJSONLayerRef = useRef(null);
   const drawControlRef = useRef(null);
   const editControlRef = useRef(null);
-   const userId = JSON.parse(localStorage.getItem('user')).id;
+   const userId = JSON.parse(localStorage.getItem('user'))._id;
 
   useEffect(() => {
     if (mapRef.current && !mapInstance.current) {
